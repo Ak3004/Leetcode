@@ -1,0 +1,62 @@
+Why Sliding Window Fails with Modulo Conditions :-
+
+Overview
+
+The sliding window technique is a powerful method often used for solving problems related to subarrays and sequences.
+However, its effectiveness can diminish in cases where the solution relies on non-monotonic behavior, particularly when 
+modulo operations are involved. This document outlines the limitations of the sliding window approach in such scenarios and 
+provides an example to illustrate the concept.
+Non-Monotonic Behavior
+The crux of the issue lies in the unpredictable nature of how the sum of elements within a sliding window behaves when subjected 
+to modulo operations. Specifically, altering the size of the window—whether by expanding or contracting it—does not guarantee a 
+consistent or predictable change in the modulo result of the current window sum. This non-monotonicity poses challenges for applying the 
+sliding window technique effectively.
+
+Example
+Consider the following array and a modulo condition:
+
+Array: arr = [5, 7, 2, 3, 6]
+Modulo Value (p): 4
+The total sum of the array is:
+5 + 7 + 2 + 3 + 6 = 23
+When we calculate 23 mod 4, we find:
+23 mod 4 = 3
+Our goal is to find subarrays where the sum of elements, when taken modulo 4, equals 3.
+
+Checking Subarrays
+Now, let’s explore different windows and their corresponding sums and modulo results:
+Window [5]:
+window_sum = 5
+5 mod 4 = 1 (no match)
+Window [5, 7]:
+window_sum = 12
+12 mod 4 = 0 (no match)
+Window [5, 7, 2]:
+window_sum = 14
+14 mod 4 = 2 (no match)
+Window [5, 7, 2, 3]:
+window_sum = 17
+17 mod 4 = 1 (no match)
+Window [5, 7, 2, 3, 6]:
+window_sum = 23
+23 mod 4 = 3 (match)
+Now, we will make our window smaller and see, we still meet our condition
+Window [7, 2, 3, 6]:
+window_sum = 18
+18 mod 4 = 2 (no match)
+So, the min length we will get will be 5 but in reality it will be 1 i.e. [3]
+Analysis
+As we adjust the window by adding and removing elements, the modulo values do not follow a consistent or predictable path.
+Alternative Approaches
+Due to the non-monotonic behavior induced by modulo conditions, alternative strategies should be considered:
+
+Prefix Sums: Using prefix sums allows for efficient calculations of subarray sums without the overhead of adjusting the window.
+Hash Maps: Utilizing hash maps to track occurrences of modulo results can help identify valid subarrays more efficiently.
+Conclusion
+
+The sliding window technique, while highly effective for many problems, encounters significant limitations when applied to scenarios involving modulo conditions. 
+The non-monotonic behavior of the window sum in relation to its modulo value necessitates a shift toward other methodologies to achieve efficient and accurate results. 
+Understanding these constraints is crucial for choosing the right algorithm for a given problem.
+
+
+
